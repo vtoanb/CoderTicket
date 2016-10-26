@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-# require 'faker'
+require 'faker'
 
 name = ['Entertainment', 'Learning', 'Everything Else']
 

@@ -17,6 +17,7 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 
 group :development, :test do
+  gem 'timecop'
   gem 'faker'
   gem 'annotate'
   gem 'rspec-rails', '~> 3.5'
