@@ -1,3 +1,4 @@
+# spec/factories/articles.rb
 # == Schema Information
 #
 # Table name: categories
@@ -8,10 +9,12 @@
 #  updated_at :datetime         not null
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# require 'faker'
 
-one:
-  name: MyString
+name = ['Entertainment', 'Learning', 'Everything Else']
 
-two:
-  name: MyString
+FactoryGirl.define do
+  factory :category do |f|
+    f.name name[Random.rand(0..2)]
+  end
+end

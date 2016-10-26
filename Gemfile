@@ -17,6 +17,8 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 
 group :development, :test do
+  gem 'faker'
+  gem 'annotate'
   gem 'rspec-rails', '~> 3.5'
   gem 'byebug'
 end
@@ -28,7 +30,6 @@ end
 
 group :test do
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
