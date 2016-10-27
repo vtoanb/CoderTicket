@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
     Event.where("starts_at < ?",Time.now).where("ends_at > ?",Time.now)
   end
 
-  def self.non_availabe
-    Event.where("starts_at < ?", Time.now)
+  def self.search(params)
+    Event.availabe.where("name ILIKE ?", "%#{params[:search]}%")
   end
 end

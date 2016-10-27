@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'events#index'
 
+  get 'search', to: 'events#index'
+
   resources :events do
     resources :tickets
   end

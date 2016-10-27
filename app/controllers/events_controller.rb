@@ -1,6 +1,10 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.availabe
+    @events = if params[:search]
+                Event.search(params)
+              else
+                Event.availabe
+              end
   end
 
   def show
