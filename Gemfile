@@ -15,6 +15,7 @@ gem 'quiet_assets'
 gem 'better_errors', group: :development
 gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
+gem 'jquery-turbolinks'
 gem 'devise'
 
 group :development, :test do
