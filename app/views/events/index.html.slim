@@ -1,0 +1,12 @@
+.events-header[style="background-image: url{{<ruby code=\"= header_background_image_url\"></ruby>}}"]
+  .container
+    h2
+      |  Discover upcoming events 
+    = form_tag( @events_path, method: :get) do
+      p
+        = text_field_tag :search, params[:search], placeholder: "Search for events, shows, courses..."
+.container-fluid.events-list
+  - @events.in_groups_of(3) do |g|
+    .row
+      - g.compact.each do |e|
+        = render partial: 'card', locals: {event: e}

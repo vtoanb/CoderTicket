@@ -17,6 +17,8 @@ gem 'font-awesome-rails'
 gem 'font-kit-rails', '~> 1.2.0'
 gem 'jquery-turbolinks'
 gem 'devise'
+gem 'slim-rails'
+
 
 group :development, :test do
   gem 'timecop'
