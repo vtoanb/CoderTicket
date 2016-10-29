@@ -19,14 +19,15 @@ class Event < ActiveRecord::Base
   belongs_to :category
   has_many :ticket_types
 
-  validates_presence_of :extended_html_description, :venue, :category, :starts_at
-  validates_uniqueness_of :name, uniqueness: {scope: [:venue, :starts_at]}
+  validates_presence_of :extended_html_description,
+                        :venue, :category, :starts_at
+  validates_uniqueness_of :name, uniqueness: { scope: [:venue, :starts_at] }
 
   def self.availabe
-    Event.where("starts_at < ?",Time.now).where("ends_at > ?",Time.now)
+    Event.where('starts_at < ?', Time.now).where('ends_at > ?', Time.now)
   end
 
   def self.search(params)
-    Event.availabe.where("name ILIKE ?", "%#{params[:search]}%")
+    Event.availabe.where('name ILIKE ?', '%#{params[:search]}%')
   end
 end
