@@ -35,6 +35,8 @@
           <td> <%= select_tag('quantity', options_for_select(0..10)) %></td> 
         </tr>
         <% end %> 
+        <%= simple_form_for @event do |event| %>
+        <% end %>
       </table>
     </div>
   </div>
