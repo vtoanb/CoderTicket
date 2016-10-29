@@ -13,5 +13,7 @@
 
 class TicketType < ActiveRecord::Base
   validates :event, presence: true
+  validates :name, presence: true
+  validates :price, presence: true
   belongs_to :event
 end

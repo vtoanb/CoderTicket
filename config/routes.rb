@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'orders/new'
+
+  get 'orders/create'
+
   devise_for :users
   root 'events#index'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029084246) do
+ActiveRecord::Schema.define(version: 20161029093351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 20161029084246) do
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
   add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
+
+  create_table "lines", force: :cascade do |t|
+    t.integer  "quantity"
+    t.integer  "ticket_type_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "order_id"
+  end
+
+  add_index "lines", ["order_id"], name: "index_lines_on_order_id", using: :btree
+  add_index "lines", ["ticket_type_id"], name: "index_lines_on_ticket_type_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "regions", force: :cascade do |t|
     t.string   "name"
@@ -84,6 +103,9 @@ ActiveRecord::Schema.define(version: 20161029084246) do
 
   add_foreign_key "events", "categories"
   add_foreign_key "events", "venues"
+  add_foreign_key "lines", "orders"
+  add_foreign_key "lines", "ticket_types"
+  add_foreign_key "orders", "users"
   add_foreign_key "ticket_types", "events"
   add_foreign_key "venues", "regions"
 end

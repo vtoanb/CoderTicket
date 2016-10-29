@@ -18,6 +18,7 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
   has_many :ticket_types
+  accepts_nested_attributes_for :ticket_types
 
   validates_presence_of :extended_html_description,
                         :venue, :category, :starts_at

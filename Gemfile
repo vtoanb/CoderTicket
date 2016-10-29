@@ -23,6 +23,7 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails', '~> 3.5'
   gem 'byebug'
+  gem 'rails-erd'
 end
 
 group :development do
