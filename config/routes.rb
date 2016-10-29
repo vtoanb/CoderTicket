@@ -1,12 +1,24 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
   get 'orders/new'
 
   get 'orders/create'
 
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+
   root 'events#index'
 
   get 'search', to: 'events#index'
+
+  authenticate :user do
+    resources :orders
+  end
 
   resources :events do
     resources :tickets
