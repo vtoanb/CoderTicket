@@ -14,11 +14,10 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
-    @event.ticket_types.build
+    3.times { @event.ticket_types.build }
   end
 
   def create
-    # raise 'e'
     @event = Event.new(event_params)
     if @event.save
       flash[:notice] = "event created successfully"
@@ -42,6 +41,6 @@ class EventsController < ApplicationController
       :starts_at,
       :ends_at,
       :published_at,
-      ticket_types_attributes: [:name, :price, :max_quantity])
+      ticket_types_attributes: [:id, :name, :price, :max_quantity])
   end
 end

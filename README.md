@@ -43,7 +43,7 @@ The person with best test coverage will win a small present from the instructor 
 * [x] Users must click "publish event" before an event becomes viewable to other users.
 * [x] Users can create ticket types for that event.
 * [x] Users can create venues.
-* [ ] An event must have at least one `ticket_type` defined before it can be published.
+* [x] An event must have at least one `ticket_type` defined before it can be published.
     * **HINT**: add `Event#have_enough_ticket_types?` (and test it)
 * [ ] User can see a list of events he or she has created.
     * Suggestions
