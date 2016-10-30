@@ -1,0 +1,30 @@
+.container-fluid.tickets-buy
+  .row.tickets-header
+    .col-xs-12.col-md-11.col-md-offset-1
+      h3
+        = "Create your own event"
+  br
+  br
+  br
+  .row
+    .col-xs-12.col-md-5.col-md-offset-3
+      = simple_form_for @event do |e|
+        = e.input :name
+        = e.input :hero_image_url
+        = e.input :extended_html_description
+        = e.input :starts_at
+        = e.input :ends_at
+        = e.input :published_at
+        = e.association :venue
+        = e.association :category
+        /= e.fields_for "ticket_types_attributes[]", e do |tk|
+          = tk.input :name
+          = tk.input :price
+          = tk.input :max_quantity
+        - @event.ticket_types.each do |tk|
+          = field_set_tag 'add ticket types' do
+            = e.simple_fields_for "ticket_types_attributes[]", tk do |ii|
+              = ii.input :name
+              = ii.input :price
+              = ii.input :max_quantity
+        = e.button :submit

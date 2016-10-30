@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :lines, through: :orders
   has_many :ticket_types, through: :lines
+  has_many :publishers
+  has_many :events, through: :publishers
 
   def current_order
     record = orders.where(finish: false).take

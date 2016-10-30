@@ -1,0 +1,28 @@
+.container-fluid.tickets-buy
+  .row.tickets-header
+    .col-xs-12.col-md-11.col-md-offset-1
+      h3
+        | events you created
+
+
+.container-fluid.events-list
+  table.table
+    tr
+      th
+        | Name
+      th
+        | start at
+      th
+        | end at
+      th
+    - @events.each do |e|
+      tr
+        td
+          = e.name
+        td
+          = e.starts_at
+        td
+          = e.ends_at
+        td
+          = link_to "edit", edit_event_path(e)
+

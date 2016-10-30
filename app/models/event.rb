@@ -20,9 +20,9 @@ class Event < ActiveRecord::Base
   belongs_to :category
   has_many :ticket_types
 
-  accepts_nested_attributes_for :ticket_types
+  accepts_nested_attributes_for :ticket_types,
+          reject_if: proc { |attributes| attributes['name'].blank? || attributes['price'].blank? }
 
-  # validates_presence_of :ticket_types
   validates_presence_of :extended_html_description,
                         :venue, :category, :starts_at
   validates_uniqueness_of :name, uniqueness: { scope: [:venue, :starts_at] }
