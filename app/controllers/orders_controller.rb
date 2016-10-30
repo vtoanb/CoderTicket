@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def new
-    @user = User.find(order_params[:user_id])
+    # @user = User.find(order_params[:user_id])
   end
 
   def create

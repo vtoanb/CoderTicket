@@ -1,6 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
+  include Devise::Test::ControllerHelpers
+
+  def setup
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    sign_in FactoryGirl.create(:user)
+  end
+
+  def login_user
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    user = FactoryGirl.create(:user)
+    user.confirm # or set a confirmed_at inside the factory. Only necessary if you are using the "confirmable" module
+    sign_in user
+  end
+
   let(:region) { create(:region) }
   let(:venue) { create(:venue, region: region) }
   let(:category) { create(:category) }
@@ -16,9 +30,9 @@ RSpec.describe EventsController, type: :controller do
     end
 
     it "should return event" do
-      Timecop.freeze(Date.today + 1) do
+      Timecop.freeze(Date.today - 1.days) do
         get :index
-        expect(assigns(:events)).to include(event)
+        expect(assigns(:events)).not_to include(event)
       end
     end
   end
