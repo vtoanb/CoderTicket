@@ -7,12 +7,11 @@ Rails.application.routes.draw do
 
   get 'search', to: 'events#index'
 
-  # authenticate :user do
-  #   resources :orders
-  # end
   authenticate :user do
-    resources :events do
-      resources :tickets
-    end
+    resources :orders
+    resources :venues
+  end
+  resources :events do
+    resources :tickets
   end
 end

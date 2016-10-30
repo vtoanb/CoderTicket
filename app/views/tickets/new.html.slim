@@ -22,16 +22,23 @@
           |  Unit Price 
         th
           |  Quantity 
+        th[hidden]
+          |  Id
+        th.event-id[hidden]
+          = @event.id
         - @event.ticket_types.each do |type|
-          tr
+          tr.line-items
             td
               = type.name
             td
               = number_to_currency(type.price, unit: 'VND ', precision: 0)
-            td
+            td.quantity
               = select_tag('quantity', options_for_select(0..10))
+            td.type-id[hidden]
+              = type.id
   .row
-    .col-md-2.col-md-offset-5
-      button.btn.btn-success.btn-lg.btn-block
-        |  Buy 
-    div
+    .col-md-2.col-md-offset-4
+      = link_to "check other events", root_path, class: "btn btn-block btn-secondary btn-lg"
+    .col-md-2
+      button#submit-line.btn.btn-success.btn-lg.btn-block
+        |  add to cart

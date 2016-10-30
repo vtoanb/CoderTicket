@@ -25,4 +25,25 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :lines, through: :orders
   has_many :ticket_types, through: :lines
+
+  def current_order
+    record = orders.where(finish: false).take
+    if record.present?
+      record
+    else
+      orders.new
+    end
+  end
+
+  def checkout
+    record = orders.where(finish: false).take
+    if record.present?
+      record.finish = true
+      record.lines.each do |line|
+        tk = line.ticket_type
+        tk.max_quantity -= line.quantity if tk.max_quantity >= line.quantity 
+      end
+      record.save
+    end
+  end
 end

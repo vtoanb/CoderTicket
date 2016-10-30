@@ -1,0 +1,21 @@
+.container-fluid.tickets-buy
+  .row.tickets-header
+    .col-xs-12.col-md-11.col-md-offset-1
+      h3
+        = "Create your own event"
+  .row
+    .col-xs-12.col-md-5.col-md-offset-3
+      = simple_form_for @event do |e|
+        = e.input :name
+        = e.input :hero_image_url
+        = e.input :extended_html_description
+        = e.input :starts_at
+        = e.input :ends_at
+        = e.input :published_at
+        = e.association :venue
+        = e.association :category
+        = e.fields_for :ticket_types do |tk|
+          = tk.input :name
+          = tk.input :price
+          = tk.input :max_quantity
+        = e.button :submit

@@ -1,0 +1,15 @@
+.container-fluid.tickets-buy
+  .row.tickets-header
+    .col-xs-12.col-md-11.col-md-offset-1
+      h3
+        = "your order's history"
+  .row
+    .col-md-11.col-md-offset-1
+      table.table
+        tr
+          th
+            | purchase date
+        - @order.each do |order|
+          tr
+            td
+              = link_to order.updated_at, order_path(order)

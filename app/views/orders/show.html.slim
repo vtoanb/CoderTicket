@@ -1,0 +1,31 @@
+.container-fluid.tickets-buy
+  .row.tickets-header
+    .col-xs-12.col-md-11.col-md-offset-1
+      h3
+        = "Your current order"
+  .row
+    .col-md-11.col-md-offset-1
+      table.table
+        tr
+          th
+            | Event
+          th 
+            | Ticket type
+          th
+            | Quantity
+          th
+            | Total
+        - @order.lines.each do |line|
+          tr
+            td
+              = line.ticket_type.event.name
+            td
+              = line.ticket_type.name
+            td
+              = line.quantity
+            td
+              = number_to_currency(line.quantity * line.ticket_type.price, unit: 'VND ', resolution: 0)
+  .row
+    .col-md-2.col-md-offset-5
+      = link_to "checkout now", orders_path(@order, checkout: true), class: "btn btn-success btn-block" unless @purchase
+      = link_to "Back", :back
