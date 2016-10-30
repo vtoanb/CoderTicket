@@ -19,11 +19,10 @@ class Event < ActiveRecord::Base
   belongs_to :venue
   belongs_to :category
   has_many :ticket_types
+
   accepts_nested_attributes_for :ticket_types
 
-
-  # validates :has_at_least_one_ticket_type?
-  
+  # validates_presence_of :ticket_types
   validates_presence_of :extended_html_description,
                         :venue, :category, :starts_at
   validates_uniqueness_of :name, uniqueness: { scope: [:venue, :starts_at] }
@@ -31,14 +30,15 @@ class Event < ActiveRecord::Base
   def self.availabe
     Event.where('starts_at < ?', Time.now).
           where('ends_at > ?', Time.now).
-          where('published_at < ?', Time.now)
+          where('published_at < ?', Time.now).
+          can_be_published
   end
-
-  # def has_at_least_one_ticket_type?
-
-  # end
 
   def self.search(params)
     Event.availabe.where('name ILIKE ?', '%#{params[:search]}%')
+  end
+
+  def self.can_be_published
+    Event.joins(:ticket_types).all.uniq
   end
 end
