@@ -1,14 +1,26 @@
 require "spec_helper"
 
-RSpec.describe "Events/index" do
-  let (:category) { create(:category) }
-  let (:venue) { create(:venue) }
-  let (:event) { create(category: category, venue: venue, extended_html_description: "haha") }
-
-  it "displays all the Events" do
+RSpec.describe "events/index", type: :view do
+  it "renders Discover upcoming events in a header tag" do
+    assign(:events, [])
     render
+    # if you want to see the whole rendered text, use 'puts rendered'
+    expect(rendered).to include("<h2> Discover upcoming events </h2>")
+  end
 
-    expect(rendered).to match(/haha/)
-    # expect(rendered).to match /dicer/
+  it "Display an event title" do
+    event = Event.create!(name: "Michael Jackson", starts_at: 2.days.ago, ends_at: 1.day.ago, extended_html_description: " a past event",
+                          venue: Venue.new, category: Category.new)
+    assign(:events, [event])
+    render
+    expect(rendered).to include('<h4 class="card-title">Michael Jackson</h4>')
+  end
+
+    it "don't display pass events  title" do
+    event = Event.create!(name: "Michael Jackson", starts_at: 2.days.ago, ends_at: 1.day.ago, extended_html_description: " a past event",
+                          venue: Venue.new, category: Category.new)
+    assign(:events, [event])
+    render
+    expect(rendered).not_to include('<h4 class="card-title">Michael Jackson</h4>')
   end
 end

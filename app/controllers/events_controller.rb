@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :my_events]
+  before_action :authenticate_user!, only: [:new, :create, :my_events, :update]
   def index
     @events = if params[:search]
                 Event.search(params)
@@ -39,6 +39,10 @@ class EventsController < ApplicationController
       flash[:notice] = "you don't have permission for this resouce"
       redirect_to root_path
     end
+  end
+
+  def update
+    @event = Event.update(event_params)
   end
 
   def my_events

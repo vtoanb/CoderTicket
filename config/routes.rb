@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   get 'my-events', to: 'events#my_events'
 
   resources :events do
-    resources :tickets
+    # resources :tickets
   end
 end

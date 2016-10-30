@@ -28,10 +28,10 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :name, uniqueness: { scope: [:venue, :starts_at] }
 
   def self.availabe
-    Event.where('starts_at < ?', Time.now).
-          where('ends_at > ?', Time.now).
-          where('published_at < ?', Time.now).
-          can_be_published
+    Event.where('starts_at < ?', Time.now)
+          # where('ends_at > ?', Time.now).
+          # where('published_at < ?', Time.now).
+          # can_be_published
   end
 
   def self.search(params)
